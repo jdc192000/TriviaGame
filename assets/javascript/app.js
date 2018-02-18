@@ -1,10 +1,45 @@
-var number = 250;
 
+
+// set global variables:
+
+var number = 30;
 var intervalId;
 
-$("#stop").on("click", stop);
+var trivia = {
+    triviaQuestion: [{
+        question: "When did Operation Overlord occur?",
+        answers: ["December 7 1941", "June 7 1942", "June 6 1944", "August 9 1945"],
+        correctAnswer: "June 6 1944"
+    },
+    {
+        question: "During the battle of Midway, the planes took off today, fought tomorrow, and landed yesterday.",
+        answers: ["True", "False"],
+        correctAnswer: "True"
+    }]
+};
 
-$("#resume").on("click", run);
+// mainline code:
+
+// console.log(trivia.triviaQuestion[0].length);
+
+run();
+
+for (i = 0; i < trivia.triviaQuestion.length; i++) {
+    console.log(trivia.triviaQuestion[i].question);
+    // var i = 1;
+    question(i);
+    run();
+    // console.log("question: " + trivia.triviaQuestion[i].question);
+    // console.log("answers: " + trivia.triviaQuestion[i].answers);
+    // console.log("correct " + trivia.triviaQuestion[i].correctAnswer);
+}
+
+console.log(trivia.triviaQuestion.length)
+
+// console.log(trivia.triviaQuestion[0].question)
+// console.log(trivia.triviaQuestion[1].question)
+
+// functions:
 
 function run() {
     clearInterval(intervalId);
@@ -17,48 +52,28 @@ function decrement() {
 
     timeNumber = timeConverter(number);
 
-    $("#show-number").html("<h1>" + timeNumber + "</h1>");
+    $("#show-time").html("<h1>" + timeNumber + "</h1>");
 
     if (number === 0) {
 
         stop();
 
-        alert("Time Up!");
+        // alert("Time Up!");
 
     } else if (number < 20 && number >= 10) {
 
-        $("#show-number").css("color", "yellow");
+        $("#show-time").css("color", "yellow");
 
     } else if (number < 10) {
 
-        $("#show-number").css("color", "red");
+        $("#show-time").css("color", "red");
 
     }
 }
 
 function stop() {
-
     clearInterval(intervalId);
 }
-
-run();
-
-// div {
-//     width: 100px;
-//     height: 100px;
-//     background-color: red;
-//     -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
-//     -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
-//     animation-name: example;
-//     animation-duration: 4s;
-// }
-
-// @keyframes example {
-//     0%   {background-color: red;}
-//     25%  {background-color: yellow;}
-//     50%  {background-color: blue;}
-//     100% {background-color: green;}
-// }
 
 function timeConverter(t) {
 
@@ -81,16 +96,35 @@ function timeConverter(t) {
     return minutes + ":" + seconds;
 };
 
-var trivia = [{
-    triviaQuestion =[{
-        question: "When did Operation Overlord occur?" +
-            answers: ["June 6 1944", "December 7 1941", "June 7 1942", "August 9 1945"] ,
-        correctAnswer: "June 6 1944"
-    };
-    triviaQuestion =[{
-        question: "The planes took off today, faught tomorrow, and landed yesterday. Is this possible?" +
-            answers: ["true", "false"] + ,
-        correctAnswer: "true"
-    };
-}];
-];
+function question(questionNumber) {
+    var triviaQuestionDiv = $("<div class='actualQuestion'>");
+    // console.log(triviaQuestionDiv);
+
+    var question = questionNumber
+
+    var actualQuestion = trivia.triviaQuestion[questionNumber].question;
+    console.log(actualQuestion);
+    var question = $("<p>").text(actualQuestion);
+    // console.log(question);
+    triviaQuestionDiv.append(question);
+    console.log(actualQuestion);
+
+
+
+    for (x = 0; x < trivia.triviaQuestion[questionNumber].answers.length; x++) {
+        // console.log(trivia.triviaQuestion[questionNumber].answers[x]);
+        var answer = $("#question").append("<input type='radio' name='optradio'>" + trivia.triviaQuestion[questionNumber].answers[x] + "</input>");
+        var a = $("<button>");
+        //   // Adding a class of movie-btn to our button
+          a.addClass("actualQuestion");
+        //   // Adding a data-attribute
+          a.attr("data-name", actualQuestion);
+        //   // Providing the initial button text
+          a.text(actualQuestion);
+        //   // Adding the button to the buttons-view div
+          $("#buttons-view").append(a);
+    }
+};
+
+    // triviaQuestionDiv.append(answer);
+    // $("#triviaQuestionDiv").append(triviaQuestionDiv);
