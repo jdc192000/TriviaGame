@@ -12,7 +12,7 @@ var trivia = {
         correctAnswer: "June 6 1944"
     },
     {
-        question: "During the battle of Midway, the planes took off today, fought tomorrow, and landed yesterday.",
+        question: "During the battle of Midway: The planes took off today, fought tomorrow, and landed yesterday.",
         answers: ["True", "False"],
         correctAnswer: "True"
     }]
@@ -29,9 +29,9 @@ for (i = 0; i < trivia.triviaQuestion.length; i++) {
     // var i = 1;
     question(i);
     run();
-    // console.log("question: " + trivia.triviaQuestion[i].question);
-    // console.log("answers: " + trivia.triviaQuestion[i].answers);
-    // console.log("correct " + trivia.triviaQuestion[i].correctAnswer);
+    console.log("question: " + trivia.triviaQuestion[i].question);
+    console.log("answers: " + trivia.triviaQuestion[i].answers);
+    console.log("correct " + trivia.triviaQuestion[i].correctAnswer);
 }
 
 console.log(trivia.triviaQuestion.length)
@@ -99,6 +99,7 @@ function timeConverter(t) {
 function question(questionNumber) {
     var triviaQuestionDiv = $("<div class='actualQuestion'>");
     // console.log(triviaQuestionDiv);
+    // console.log("logging: " + this.class);
 
     var question = questionNumber
 
@@ -114,15 +115,15 @@ function question(questionNumber) {
     for (x = 0; x < trivia.triviaQuestion[questionNumber].answers.length; x++) {
         // console.log(trivia.triviaQuestion[questionNumber].answers[x]);
         var answer = $("#question").append("<input type='radio' name='optradio'>" + trivia.triviaQuestion[questionNumber].answers[x] + "</input>");
-        var a = $("<button>");
-        //   // Adding a class of movie-btn to our button
-          a.addClass("actualQuestion");
+        var a = $("<div id='question'>");
+
+          a.addClass("answer");
         //   // Adding a data-attribute
-          a.attr("data-name", actualQuestion);
+          a.attr("data-name", answer);
         //   // Providing the initial button text
           a.text(actualQuestion);
         //   // Adding the button to the buttons-view div
-          $("#buttons-view").append(a);
+          $("#trivia").append(a);
     }
 };
 
